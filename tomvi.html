@@ -1,0 +1,129 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+	<title>TOMVi</title>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="./css/tomvi.css">
+	<script type="text/javascript" src="./js/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="./js/jcanvas.min.js"></script>
+</head>
+
+<body>
+	<!-- Title -->
+	<p id="topTitle"> TOMVi: Tool for Overviewing Metadata Visualization</p>
+	<!-- Button -->
+	<div class="topButtons">
+		<!-- file button -->
+		<div class="button">
+			<!-- popup -->			
+			<button type="button" id="fileButton" onclick="popup('fileBox')">File</button>
+			<!-- file box -->
+			<div id="fileBox" class="box">
+				<p class="boxTitle">File</p>
+				<form class="boxForm" name="loadingForm" style="margin-bottom: 0;">
+					<p class="boxFormParts">Loading data</p>
+					<p class="boxFormParts">background file:<input type="file" id="backgroundFile" onchange="fileUpload(this.files, 'background')"></p>
+					<p class="boxFormParts">data file:<input type="file" id="dataFile" onchange="fileUpload(this.files, 'data')"></p>
+				</form>
+				<button class="boxFormParts" onclick="dataLoading()" style="margin-left: 1em;">Upload</button>
+				<div class="boxForm">
+					<p class="boxFormParts">Save</p>
+					<p class="boxFormParts">image
+						<button class="boxFormParts" onclick="saveImage('jpeg')">jpeg</button>
+						<button class="boxFormParts" onclick="saveImage('png')">png</button>
+					</p>
+					<p class="boxFormParts">legend
+						<button class="boxFormParts" onclick="saveTable('jpeg')">jpeg</button>
+						<button class="boxFormParts" onclick="saveTable('png')">png</button>
+					</p>
+				</div>				
+			</div>
+		</div>
+		<!-- draw line button -->
+		<div class="button">
+			<button type="button" id="drawLineButton" onclick="redrawLines()" >Draw Line</button>
+		</div>
+		<!-- set link button -->
+		<div class="button">
+			<!-- popup -->
+			<button type="button" id="setLinkButton" onclick="popup('setLinkBox')">Set Link</button>
+			<!-- set link box -->
+			<div id="setLinkBox" class="box">
+				<p class="boxTitle">Set Links</p>
+				<form class="boxForm" id="setLinkRadio">
+					<label><input type="radio" name="radio" value="hidden" checked="checked">hidden</label>
+					<label><input type="radio" name="radio" value="visible">visible</label>
+				</form>
+				<!-- links table -->
+				<table id="hiddenLinksTable" class="boxForm">
+					<!-- header -->
+					<thead>
+					<tr><th>point1</th><th>point2</th><th></th></tr>
+					</thead>
+					<!-- table body -->
+					<tbody id="hiddenLinksTableBody"></tbody>
+				</table>
+				<button type="button" id="hiddenLinksApplyButton" class="boxForm" onclick="applyLinks()">Apply</button>
+				<div class="boxForm">
+					<p class="boxFormParts">Upload hidden links list</p>
+					<p class="boxFormParts">
+						<input type="file" class="setLinkBoxButton" id="hiddenLinksUpload" onchange="uploadLinksTable(this.files)">
+					</p>
+				</div>
+			</div>
+		</div>
+		<!-- set config  button -->
+		<div class="button">
+			<!-- popup -->
+			<button type="button" id="setConfigButton" onclick="popup('setConfigureBox')">Configure</button>
+			<!-- set configure box -->
+			<div id="setConfigureBox" class="box">
+				<p class="boxTitle"> Set Configure </p>
+				<!-- plot -->
+				<form class="boxForm" name="plot">
+					<p class="boxFormParts">plot</p>
+					<p class="boxFormParts">plot size:<input type="number" name="plotSize" min=0 value=20>[0&lt;]</p>
+					<p class="boxFormParts">label size:<input type="number" name="textSize" min=0 value=12>[0&lt;]</p>				
+				</form>
+				<!-- color -->
+				<form class="boxForm" name="color">
+					<p class="boxFormParts">color</p>
+					<p class="boxFormParts">transparency:<input type="number" name="transparency" min=0 max=1 value=0.6 step=0.1>[0-1]</p>
+				</form>
+				<!-- background -->
+				<form class="boxForm" name="background">
+					<p class="boxFormParts">background</p>
+					<p class="boxFormParts">zoom:<input type="number" name="zoom" min=0 value=100>[%]</p>
+				</form>
+				<!-- apply button -->
+				<button type="button" id="setConfigureApplyButton" onclick="applyConfigure()" class="boxForm"> Apply </button>
+			</div>
+		</div>
+		<!-- zoom button -->
+		<div class="button" id="zoomButton">
+			Zoom:
+			<button type="button" id="zoomPlus" onclick="zoom('plus')">+</button>
+			<button type="button" id="zoomNative" onclick="zoom('native')">100%</button>
+			<button type="button" id="zoomMinus" onclick="zoom('minus')">-</button>
+		</div>
+	</div>
+	
+	<!-- canvas -->
+	<div id="canvas_div">
+		<canvas id="canvas">"This browser is not supported"</canvas>
+	</div>
+	<script type="text/javascript" src="./js/tomvi.js"></script>
+	
+	<!-- otu list checkbox -->
+	<div name="checkbox" id="checkboxForm">
+		<!-- checkbox table -->
+		<table id="checkboxTable">
+			<thead id="checkboxTableHeader"></thead>
+			<tbody id="checkboxTableBody"></tbody>
+		</table>
+	</div>
+</body>
+
+
+</html>
