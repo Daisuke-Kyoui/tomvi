@@ -1,4 +1,4 @@
-# tomvi
+# TOMVi
 
 #Getting Start  
 Clone the repository in https://github.com/Daisuke-Kyoui/tomvi to your computer.  
